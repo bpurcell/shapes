@@ -23,7 +23,7 @@ abstract class MY_Controller extends CI_Controller
         'json'          => 'application/json',
         'geojson'       => 'application/json',
         'map'          => 'text/html',
-        'html'          => 'text/html'
+        'html'          => 'text/html',
         //'jsonp'         => 'application/javascript',
         //'serialized'    => 'application/vnd.php.serialized',
         //'php'           => 'text/plain',
@@ -45,8 +45,12 @@ abstract class MY_Controller extends CI_Controller
             'url' => base_url(),
             'response' => $this->_supported_formats,
             'endpoints' => [
+                    ['endpoint' =>'examples', 
+                    'description' => 'Some examples for you to peruse.',
+                    'link' => base_url().'examples'],
                     ['endpoint' =>'shapes/', 
-                    'description' => 'Get more detailed information about the shape endpoint here'],
+                    'description' => 'Get more detailed information about the shape endpoint here',
+                    'link' => base_url().'shapes'],
                     ['endpoint' =>'shapes/countries', 
                     'description' => 'Get Countries here.  Refer to params options to filter and limit.',
                     'link' => base_url().'shapes/countries'],
