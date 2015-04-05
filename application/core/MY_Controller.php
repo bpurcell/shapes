@@ -22,11 +22,12 @@ abstract class MY_Controller extends CI_Controller
         'xml'           => 'application/xml',
         'json'          => 'application/json',
         'geojson'       => 'application/json',
-        'jsonp'         => 'application/javascript',
-        'serialized'    => 'application/vnd.php.serialized',
-        'php'           => 'text/plain',
-        'html'          => 'text/html',
-        'csv'           => 'application/csv'
+        'map'          => 'text/html',
+        'html'          => 'text/html'
+        //'jsonp'         => 'application/javascript',
+        //'serialized'    => 'application/vnd.php.serialized',
+        //'php'           => 'text/plain',
+        //'csv'           => 'application/csv'
     );
     
 
@@ -44,21 +45,21 @@ abstract class MY_Controller extends CI_Controller
             'url' => base_url(),
             'response' => $this->_supported_formats,
             'endpoints' => [
-                    ['endpoint' =>'shape/', 
+                    ['endpoint' =>'shapes/', 
                     'description' => 'Get more detailed information about the shape endpoint here'],
-                    ['endpoint' =>'shape/countries', 
+                    ['endpoint' =>'shapes/countries', 
                     'description' => 'Get Countries here.  Refer to params options to filter and limit.',
-                    'link' => base_url().'shape/countries'],
-                    ['endpoint' =>'shape/countries/#id', 
+                    'link' => base_url().'shapes/countries'],
+                    ['endpoint' =>'shapes/countries/#id', 
                     'description' => 'Get a country by id. Refer to params options to filter and limit.'],
-                    ['endpoint' =>'shape/search/countries/#query', 
+                    ['endpoint' =>'shapes/search/countries/#query', 
                     'description' => 'Do a search against the countries.   We use Natural Earth Data and have all the fields.  You can define a search by `column-query`. We then search for column LIKE `%query%`'],
-                    ['endpoint' =>'shape/states_provinces', 
+                    ['endpoint' =>'shapes/states_provinces', 
                     'description' => 'Get State or Province here.  Refer to params options to filter and limit.',
-                    'link' => base_url().'shape/states_provinces'],
-                    ['endpoint' =>'shape/states_provinces/#id', 
+                    'link' => base_url().'shapes/states_provinces'],
+                    ['endpoint' =>'shapes/states_provinces/#id', 
                     'description' => 'Get a State or Province by id. Refer to params options to filter and limit.'],
-                    ['endpoint' =>'shape/search/states_provinces/#query', 
+                    ['endpoint' =>'shapes/search/states_provinces/#query', 
                     'description' => 'Do a search against the State or Provinces.   We use Natural Earth Data and have all the fields.  You can define a search by `column-query`. We then search for column LIKE `%query%`']
                         ] 
         ];

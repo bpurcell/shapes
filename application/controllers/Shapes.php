@@ -14,7 +14,7 @@
 */
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
-class Shape extends MY_Controller
+class Shapes extends MY_Controller
 {
 	function __construct()
     {
