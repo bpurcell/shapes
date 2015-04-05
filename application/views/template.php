@@ -47,8 +47,8 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="<?=base_url()?>">Home</a></li>
-            <li><a href="<?=base_url()?>shape">General Shapes</a></li>
-            <li><a href="<?=base_url()?>">Contact</a></li>
+            <li><a href="<?=base_url()?>shapes">Shapes</a></li>
+            <li><a href="<?=base_url()?>examples">Examples</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
