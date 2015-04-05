@@ -1,0 +1,8 @@
+RewriteEngine on
+
+RewriteCond $1 !^(index\.php|assets|human\.txt|robots\.txt|php\.php|public|proxy.html|genghis\.php|test\.html|miscellany|temp|favicon.ico|tools|static)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+
+php_value upload_max_filesize 100M
+php_value post_max_size 100M
+php_value memory_limit 2560M
