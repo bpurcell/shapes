@@ -75,6 +75,7 @@ class Shapes extends MY_Controller
 
         if($this->data->results)
         {
+            $this->data->mappable = true;
             $this->_out_put(); // 200 being the HTTP response code
         }
 
@@ -91,6 +92,7 @@ class Shapes extends MY_Controller
 
         if($this->data->results)
         {
+            $this->data->mappable = true;
             $this->_out_put(); // 200 being the HTTP response code
         }
 
@@ -113,6 +115,7 @@ class Shapes extends MY_Controller
 
         if($this->data->results)
         {
+            $this->data->mappable = true;
             $this->_out_put(); // 200 being the HTTP response code
         }
 
@@ -129,6 +132,7 @@ class Shapes extends MY_Controller
 
         if($this->data->results)
         {
+            $this->data->mappable = true;
             $this->_out_put(); // 200 being the HTTP response code
         }
 

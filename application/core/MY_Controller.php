@@ -69,6 +69,8 @@ abstract class MY_Controller extends CI_Controller
         ];
         $this->data->results = new stdClass;
 
+        $this->data->mappable = false;
+
         // Check to see if this IP is Blacklisted
         if ($this->config->item('rest_ip_blacklist_enabled')) {
             $this->_check_blacklist_auth();

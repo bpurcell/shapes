@@ -37,9 +37,11 @@ class Examples extends MY_Controller
         ];
         foreach($this->data->results as &$result):
             foreach($this->_supported_formats as $k => $formats):
-                $url = base_url().str_replace('|||',$k,$result['url']);
-                $result[$k] = base_url().$result['url'].'&format='.$k;
-                
+                if($k == 'html'){
+                    $result[$k] = base_url().$result['url'];
+                } else {
+                    $result[$k] = base_url().$result['url'].'&format='.$k;
+                }
             endforeach;
             
             unset($result['url']);

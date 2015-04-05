@@ -36,8 +36,9 @@ function makeDL($data){
     echo $dl;
     
 }
-
-echo '<h2>Results - <a href="'.current_url().'?format=map&'.$_SERVER['QUERY_STRING'].'" target="_blank">View Map</a><br></h2>';
+echo '<h2>Results</h2>';
+if(isset($this->data->mappable) && $this->data->mappable == true)
+    echo '<h3><a href="'.current_url().'?format=map&'.$_SERVER['QUERY_STRING'].'" target="_blank">View Map</a></h3>';
 foreach($this->data->results as $r):
      makeDL($r);
 endforeach;
