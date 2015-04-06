@@ -62,7 +62,27 @@ class Shapes extends MY_Controller
     function search($type, $params=false){
         $this->{'search_'.$type}($params);
     }
+    function is_within($type, $params=false){
+        $this->{'within_'.$type}($params);
+    }
+
     
+    function within_countries($query = false)
+    {
+        $this->natural_data->within('countries',$query,$this->input->get());
+
+        if($this->data->results)
+        {
+            $this->data->mappable = true;
+            $this->_out_put(); // 200 being the HTTP response code
+        }
+
+        else
+        {
+            $this->data->results = ['Error.  There were no results found.'];
+            $this->_out_put();
+        }
+    }
     function countries($id = false)
     {
         if($id != false && !is_numeric($id)){
@@ -129,6 +149,29 @@ class Shapes extends MY_Controller
     function search_states_provinces($query = false)
     {
         $this->natural_data->search('states_provinces',$query,$this->input->get());
+
+        if($this->data->results)
+        {
+            $this->data->mappable = true;
+            $this->_out_put(); // 200 being the HTTP response code
+        }
+
+        else
+        {
+            $this->data->results = ['Error.  There were no results found.'];
+            $this->_out_put();
+        }
+    }
+
+    function sandy($id = false)
+    {
+        if($id != false && !is_numeric($id)){
+                $this->data->results = ['Error. No Idea needed.'];
+                $this->_out_put();
+                return;
+        }
+        
+        $this->natural_data->get_sandy('hurricanesandy',$id,$this->input->get());
 
         if($this->data->results)
         {

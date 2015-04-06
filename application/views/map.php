@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<?=base_url()?>favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Sourcemap Shapes Map</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?=base_url()?>assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -59,6 +59,14 @@
 
          map.fitBounds(featureLayer.getBounds());
          
+         var layers = {
+               Default: L.mapbox.tileLayer('examples.map-i86nkdio'),
+               Sourcemap: L.mapbox.tileLayer('bpurcell.map-im7uxt8h'),
+               Satellite: L.mapbox.tileLayer('examples.map-igb471ik')
+           };
+
+           layers.Default.addTo(map);
+           L.control.layers(layers).addTo(map);
          
          featureLayer.eachLayer(function(layer) {
 
