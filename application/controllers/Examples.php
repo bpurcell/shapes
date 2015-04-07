@@ -35,6 +35,7 @@ class Examples extends MY_Controller
             'caribbean' => ['name' => "Caribbean Unsimplified",'url' => 'shapes/search/countries/subregion-Caribbean?fields=all&limit=500&simplify=.001'],
             'usa' => ['name' => "United States all fields by id",'url' => 'shapes/countries/238?fields=all'],
             'sandy' => ['name' => "Hurricane Sandy 5 day cone of uncertainity.",'url' => 'shapes/hurricanesandy?simplify=.001'],
+            'populated_places' => ['name' => "Populated Places in the US",'url' => 'shapes/search/ne_50m_populated_places/sov_a3-usa?fields=id-name-adm0name-adm1name-timezone-elevation'],
         ];
         foreach($this->data->results as &$result):
             foreach($this->_supported_formats as $k => $formats):
