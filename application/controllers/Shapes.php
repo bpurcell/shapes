@@ -48,8 +48,40 @@ class Shapes extends MY_Controller
             'states_provinces' => 'States and Provinces Data'
         ];
 
+        if($this->data->results){
+            $this->_out_put(); // 200 being the HTTP response code
+        } else {
+            $this->data->results = ['error' => 'Error.  There were no results found.'];
+            $this->_out_put();
+        }
+    }
+
+    function main($method, $query = false)
+    {
+        if(isset($query[0]) && !is_numeric($query[0])){
+                $this->data->results = ['error' => 'Error.  That was not an id.'];
+                $this->_out_put();
+                return;
+        }
+        
+        $this->natural_data->get($method,$query,$this->input->get());
+
+        if($this->data->results){
+            $this->data->mappable = true;
+            $this->_out_put(); // 200 being the HTTP response code
+        } else {
+            $this->data->results = ['error' => 'Error.  There were no results found.'];
+            $this->_out_put();
+        }
+    }
+    
+    function search($type, $query=false){
+
+        $this->natural_data->search($type,$query,$this->input->get());
+
         if($this->data->results)
         {
+            $this->data->mappable = true;
             $this->_out_put(); // 200 being the HTTP response code
         }
 
@@ -58,132 +90,9 @@ class Shapes extends MY_Controller
             $this->data->results = ['error' => 'Error.  There were no results found.'];
             $this->_out_put();
         }
-    }
-    function search($type, $params=false){
-        $this->{'search_'.$type}($params);
-    }
-    function is_within($type, $params=false){
-        $this->{'within_'.$type}($params);
-    }
-
-    
-    function within_countries($query = false)
-    {
-        $this->natural_data->within('countries',$query,$this->input->get());
-
-        if($this->data->results)
-        {
-            $this->data->mappable = true;
-            $this->_out_put(); // 200 being the HTTP response code
-        }
-
-        else
-        {
-            $this->data->results = ['Error.  There were no results found.'];
-            $this->_out_put();
-        }
-    }
-    function countries($id = false)
-    {
-        if($id != false && !is_numeric($id)){
-                $this->data->results = ['Error.  That was not an id.'];
-                $this->_out_put();
-                return;
-        }
         
-        $this->natural_data->get('countries',$id,$this->input->get());
-
-        if($this->data->results)
-        {
-            $this->data->mappable = true;
-            $this->_out_put(); // 200 being the HTTP response code
-        }
-
-        else
-        {
-            $this->data->results = ['Error.  There were no results found.'];
-            $this->_out_put();
-        }
-    }
-    
-    function search_countries($query = false)
-    {
-        $this->natural_data->search('countries',$query,$this->input->get());
-
-        if($this->data->results)
-        {
-            $this->data->mappable = true;
-            $this->_out_put(); // 200 being the HTTP response code
-        }
-
-        else
-        {
-            $this->data->results = ['Error.  There were no results found.'];
-            $this->_out_put();
-        }
-    }
-    
-    function states_provinces($id = false)
-    {
-        if($id != false && !is_numeric($id)){
-                $this->data->results = ['Error.  That was not an id.'];
-                $this->_out_put();
-                return;
-        }
-            
-        $this->natural_data->get('states_provinces',$id,$this->input->get());
-
-        if($this->data->results)
-        {
-            $this->data->mappable = true;
-            $this->_out_put(); // 200 being the HTTP response code
-        }
-
-        else
-        {
-            $this->data->results = ['Error.  There were no results found.'];
-            $this->_out_put();
-        }
-    }
-    
-    function search_states_provinces($query = false)
-    {
-        $this->natural_data->search('states_provinces',$query,$this->input->get());
-
-        if($this->data->results)
-        {
-            $this->data->mappable = true;
-            $this->_out_put(); // 200 being the HTTP response code
-        }
-
-        else
-        {
-            $this->data->results = ['Error.  There were no results found.'];
-            $this->_out_put();
-        }
     }
 
-    function sandy($id = false)
-    {
-        if($id != false && !is_numeric($id)){
-                $this->data->results = ['Error. No Idea needed.'];
-                $this->_out_put();
-                return;
-        }
-        
-        $this->natural_data->get_sandy('hurricanesandy',$id,$this->input->get());
 
-        if($this->data->results)
-        {
-            $this->data->mappable = true;
-            $this->_out_put(); // 200 being the HTTP response code
-        }
-
-        else
-        {
-            $this->data->results = ['Error.  There were no results found.'];
-            $this->_out_put();
-        }
-    }
 
 }

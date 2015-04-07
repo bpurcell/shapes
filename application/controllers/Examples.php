@@ -34,7 +34,7 @@ class Examples extends MY_Controller
             'china' => ['name' => "China Simplified with some extra fields",'url' => 'shapes/search/countries/name-china?fields=id-name-formal_en-economy-income_grp-pop_est-subregion-continent&simplify=.5'],
             'caribbean' => ['name' => "Caribbean Unsimplified",'url' => 'shapes/search/countries/subregion-Caribbean?fields=all&limit=500&simplify=.001'],
             'usa' => ['name' => "United States all fields by id",'url' => 'shapes/countries/238?fields=all'],
-            'sandy' => ['name' => "Hurricane Sandy 5 day cone of uncertainity.",'url' => 'shapes/sandy?simplify=.001'],
+            'sandy' => ['name' => "Hurricane Sandy 5 day cone of uncertainity.",'url' => 'shapes/hurricanesandy?simplify=.001'],
         ];
         foreach($this->data->results as &$result):
             foreach($this->_supported_formats as $k => $formats):

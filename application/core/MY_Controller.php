@@ -87,7 +87,7 @@ abstract class MY_Controller extends CI_Controller
                 $method
             ], $params);
         else:
-            show_404();
+            $this->main($method,$params);
         endif;
     }    
     function _out_put()
