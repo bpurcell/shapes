@@ -77,6 +77,10 @@ abstract class MY_Controller extends CI_Controller
         }
         // Set up our GET variables
         $this->_get_format        = ($this->input->get('format'))?$this->input->get('format'):'html';
+        
+
+        $this->_allow = $this->_detect_api_key();
+        
     }
 
     public function _remap($method, $params = [])
@@ -121,5 +125,76 @@ abstract class MY_Controller extends CI_Controller
         
         
     }
+    
+
+
+    /**
+     * Detect API Key
+     *
+     * See if the user has provided an API key
+     *
+     * @return boolean
+     */
+    protected function _detect_api_key()
+    {
+        // Get the api key name variable set in the rest config file
+        $api_key_variable = config_item('rest_key_name');
+
+        // Work out the name of the SERVER entry based on config
+        $key_name = 'HTTP_'.strtoupper(str_replace('-', '_', $api_key_variable));
+
+        $this->key = NULL;
+        $this->level = NULL;
+        $this->user_id = NULL;
+        $this->ignore_limits = FALSE;
+
+        // Find the key from server or arguments
+        if (($key = isset($this->_args[$api_key_variable]) ? $this->_args[$api_key_variable] : $this->input->server($key_name))) {
+            if ( ! ($row = $this->db->where(config_item('rest_key_column'), $key)->get(config_item('rest_keys_table'))->row())) {
+                return FALSE;
+            }
+
+            $this->key = $row->{config_item('rest_key_column')};
+
+            isset($row->user_id) and $this->user_id = $row->user_id;
+            isset($row->level) and $this->level = $row->level;
+            isset($row->ignore_limits) and $this->ignore_limits = $row->ignore_limits;
+
+            $this->_apiuser =  $row;
+
+            /*
+             * If "is private key" is enabled, compare the ip address with the list
+             * of valid ip addresses stored in the database.
+             */
+            if (!empty($row->is_private_key)) {
+                var_dump('private key?');
+                // Check for a list of valid ip addresses
+                if (isset($row->ip_addresses)) {
+                    // multiple ip addresses must be separated using a comma, explode and loop
+                    $list_ip_addresses = explode(",", $row->ip_addresses);
+                    $found_address = FALSE;
+
+                    foreach ($list_ip_addresses as $ip_address) {
+                        if ($this->input->ip_address() == trim($ip_address)) {
+                            // there is a match, set the the value to TRUE and break out of the loop
+                            $found_address = TRUE;
+                            break;
+                        }
+                    }
+
+                    return $found_address;
+                } else {
+                    // There should be at least one IP address for this private key.
+                    return FALSE;
+                }
+            }
+
+            return $row;
+        }
+
+        // No key has been sent
+        return FALSE;
+    }
+    
     
 }
